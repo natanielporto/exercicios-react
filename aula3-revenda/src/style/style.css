@@ -1,0 +1,122 @@
+body {
+  width: 1400px;
+  display: flexbox;
+  margin: auto;
+  background: black;
+}
+
+h1 {
+  background-color: black;
+  color: gold;
+  font-weight: 700;
+}
+
+h2 {
+  color: gold;
+  font-weight: 700;
+  margin: 22px 0 22px 350px
+}
+
+h3 {
+  color: gold;
+  font-weight: 700;  
+}
+
+.sidebar {
+  background: rgba(128,128,128,.2);
+  height: 80vh;
+}
+
+.description {
+  color: white;
+  font-style: italic;
+}
+
+.btnSpecial {
+  color: black;
+  background: orange;
+  width: 200px;
+}
+
+.card {
+  width: 350px;
+  height: 350px;
+  margin: 0 0 40px 45px;
+  padding: 8px;
+  border-radius: 25px;
+  background: rgba(128,128,128,.2);
+}
+
+.cardTitle {
+  color: black;
+  font-size: 24px;
+}
+
+.imgFit {
+  object-fit: contain;
+  background-color: white;
+  border-radius: 25px;
+  height: 190px;
+}
+
+.feats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.value {
+  font-size: 24px;
+  height: 60px;
+  margin-left: 8px;
+  width: 170px;
+  border-radius: 10px;
+  background: rgb(190, 13, 13);
+}
+
+.pills {
+  display: inline-grid;
+}
+
+.newPill {
+  margin: 2px;
+  font-size: 16px;
+}
+
+.img-herbie {
+  border-radius: 10px;
+}
+
+.over {
+  background: rgba(0,0,0,.8);
+  margin-top: 70px;
+  height: 320px;
+  color:  white;
+  border-radius: 10px;
+}
+
+.squareSocial {
+  background-color: rgba(255, 255, 255, .1);
+  color: gold;
+  height: 150px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 64px;
+  margin: 90px 50px;
+}
+
+.formStyle {
+  color: white;
+  margin-left: 32px;
+}
+
+.contactStyle {
+  width: 500px;
+  margin-bottom: 48px;
+}
+
+.customWarn {
+  background-color: #FFA501 !important;
+}
