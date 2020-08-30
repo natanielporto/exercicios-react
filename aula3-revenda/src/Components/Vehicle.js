@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import { useForm } from "react-hook-form";
 
 const Vehicle = () => {
   const { register, handleSubmit, errors, setValue } = useForm();
-  const currentYear = new Date().getFullYear();
   const [list, setList] = useState([]);
+  const [newButton, changeButton] = useState(false);
+  const [newId, readId] = useState(null);
+  const currentYear = new Date().getFullYear();
 
   const handleClear = (event) => {
     const fields = [
@@ -35,6 +37,9 @@ const Vehicle = () => {
       ? JSON.parse(localStorage.getItem("cars"))
       : "";
 
+    data.id = new Date().getTime();
+    console.log(data.id);
+
     localStorage.setItem("cars", JSON.stringify([...cars, data]));
 
     setList([...list, data]);
@@ -45,8 +50,57 @@ const Vehicle = () => {
   };
 
   const handleCancel = (event) => {
-    handleClear(event);
     event.preventDefault();
+    handleClear(event);
+  };
+
+  const handleClick = (event) => {
+    const tr = event.target.closest("tr");
+    const id = Number(tr.getAttribute("data-id"));
+
+    if (event.target.classList.contains("fa-edit")) {
+      changeButton(true);
+
+      readId(id);
+      setValue("brands", tr.cells[0].innerText);
+      setValue("model", tr.cells[1].innerText);
+      setValue("color", tr.cells[2].innerText);
+      setValue("engine", tr.cells[3].innerText);
+      setValue("shifter", tr.cells[4].innerText);
+      setValue("year", tr.cells[5].innerText);
+      setValue("km", tr.cells[6].innerText);
+      setValue("value", tr.cells[7].innerText);
+    } else if (event.target.classList.contains("fa-times-circle")) {
+      const model = tr.cells[1].innerText;
+
+      if (window.confirm(`Remover o veículo ${model}?`)) {
+        const cars = JSON.parse(localStorage.getItem("cars"));
+
+        const newCars = cars.filter((el) => el.id !== id);
+
+        localStorage.setItem("cars", JSON.stringify(newCars));
+
+        setList(newCars);
+      }
+    }
+  };
+
+  const handleUpdate = (data, event) => {
+    const cars = JSON.parse(localStorage.getItem("cars"));
+    let newArr = [];
+
+    for (let car of cars) {
+      if (car.id === newId) {
+        data.id = newId;
+        newArr.push(data);
+      } else {
+        newArr.push(car);
+      }
+    }
+    localStorage.setItem("cars", JSON.stringify(newArr));
+    setList(newArr);
+    handleClear(event);
+    changeButton(false);
   };
 
   return (
@@ -191,11 +245,18 @@ const Vehicle = () => {
           </div>
           <div>
             <button
-              className="btn customWarn mr-3"
+              className={newButton ? "d-none" : "btn customWarn mr-3"}
               type="submit"
               onClick={handleSubmit(handleAdd)}
             >
               Cadastrar
+            </button>
+            <button
+              className={newButton ? "btn btn-primary mr-3" : "d-none"}
+              type="submit"
+              onClick={newButton && handleSubmit(handleUpdate)}
+            >
+              Alterar
             </button>
             <button className="btn btn-danger" onClick={handleCancel}>
               Cancelar
@@ -220,7 +281,7 @@ const Vehicle = () => {
           </thead>
           <tbody>
             {list.map((el) => (
-              <tr key={el + new Date().getMilliseconds}>
+              <tr key={el.id} data-id={el.id} onClick={handleClick}>
                 <td>{el.brands}</td>
                 <td>{el.model}</td>
                 <td>{el.color}</td>
@@ -229,6 +290,16 @@ const Vehicle = () => {
                 <td>{el.year}</td>
                 <td>{el.km}</td>
                 <td>{el.value}</td>
+                <td>
+                  <i
+                    className="far fa-edit text-warning pointer mr-3"
+                    title="Alterar"
+                  ></i>
+                  <i
+                    className="far fa-times-circle text-danger pointer"
+                    title="Excluir"
+                  ></i>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -14,16 +14,16 @@ h1 {
 h2 {
   color: gold;
   font-weight: 700;
-  margin: 22px 0 22px 350px
+  margin: 22px 0 22px 350px;
 }
 
 h3 {
   color: gold;
-  font-weight: 700;  
+  font-weight: 700;
 }
 
 .sidebar {
-  background: rgba(128,128,128,.2);
+  background: rgba(128, 128, 128, 0.2);
   height: 80vh;
 }
 
@@ -44,7 +44,7 @@ h3 {
   margin: 0 0 40px 45px;
   padding: 8px;
   border-radius: 25px;
-  background: rgba(128,128,128,.2);
+  background: rgba(128, 128, 128, 0.2);
 }
 
 .cardTitle {
@@ -88,15 +88,15 @@ h3 {
 }
 
 .over {
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
   margin-top: 70px;
   height: 320px;
-  color:  white;
+  color: white;
   border-radius: 10px;
 }
 
 .squareSocial {
-  background-color: rgba(255, 255, 255, .1);
+  background-color: rgba(255, 255, 255, 0.1);
   color: gold;
   height: 150px;
   border-radius: 20px;
@@ -118,5 +118,9 @@ h3 {
 }
 
 .customWarn {
-  background-color: #FFA501 !important;
+  background-color: #ffa501 !important;
+}
+
+.pointer {
+  cursor: pointer;
 }
