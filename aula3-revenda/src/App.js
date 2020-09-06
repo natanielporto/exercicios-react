@@ -7,9 +7,17 @@ import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Social from "./Components/Social";
 import End from "./Components/End";
+import Statistics from "./Components/Statistics";
 import "./style/style.css";
 
-const btns = ["Cadastros", "Carros", "Caminhonetes", "Motos"];
+const btns = [
+  "Home",
+  "Cadastros",
+  "Balanço",
+  "Carros",
+  "Caminhonetes",
+  "Motos",
+];
 const cats = ["A Herbie", "Endereço", "Contato", "Redes Sociais"];
 
 const detail = (
@@ -24,6 +32,8 @@ const detail = (
 
 const type = (category) => {
   switch (category) {
+    case "Home":
+      return "warehouse";
     case "Cadastros":
       return "plus";
     case "Carros":
@@ -32,6 +42,8 @@ const type = (category) => {
       return "truck";
     case "Motos":
       return "motorcycle";
+    case "Balanço":
+      return "database";
     default:
       return null;
   }
@@ -39,11 +51,17 @@ const type = (category) => {
 
 function App() {
   const handleDisplay = (event) => {
-    toggleTab(!showTab);
     const where = event.target.innerText;
+    toggleTab(where);
     switch (where) {
+      case "Home":
+        toggleTab(false);
+        break;
       case "Cadastros":
         changeTab(<Vehicle />);
+        break;
+      case "Balanço":
+        changeTab(<Statistics />);
         break;
       case "Carros":
         changeTab(<Cars />);

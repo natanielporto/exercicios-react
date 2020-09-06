@@ -8,6 +8,17 @@ const Vehicle = () => {
   const [newId, readId] = useState(null);
   const currentYear = new Date().getFullYear();
 
+  function formatValue(val) {
+    return Number(val)
+      .toFixed(2)
+      .replace(".", ",")
+      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+
+  function formatKm(km) {
+    return km.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+
   const handleClear = (event) => {
     const fields = [
       "brands",
@@ -38,7 +49,6 @@ const Vehicle = () => {
       : "";
 
     data.id = new Date().getTime();
-    console.log(data.id);
 
     localStorage.setItem("cars", JSON.stringify([...cars, data]));
 
@@ -288,8 +298,8 @@ const Vehicle = () => {
                 <td>{el.engine}</td>
                 <td>{el.shifter}</td>
                 <td>{el.year}</td>
-                <td>{el.km}</td>
-                <td>{el.value}</td>
+                <td>{formatKm(el.km)}</td>
+                <td>{formatValue(el.value)}</td>
                 <td>
                   <i
                     className="far fa-edit text-warning pointer mr-3"
